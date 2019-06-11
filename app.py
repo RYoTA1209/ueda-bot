@@ -35,7 +35,7 @@ def callback():
 def handle_message(event):
     res = ""
     for k,v in pattern_dict.items():
-        if event.message.text in k:
+        if k in event.message.text:
             res = v
             break
         if res:
