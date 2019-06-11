@@ -1,4 +1,7 @@
 from flask import Flask
+import os
+
+port = os.environ['PORT']
 
 app = Flask(__name__)
 
@@ -9,5 +12,4 @@ def hello_world():
 
 
 if __name__ == '__main__':
-    app.run()
-git
+    app.run(port=port)
