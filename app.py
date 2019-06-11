@@ -14,6 +14,8 @@ LINE_CHANNEL_SECRET = os.environ['LINE_CHANNEL_SECRET']
 line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
+pattern_dict = {}
+
 @app.route('/callback',methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
@@ -31,7 +33,18 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='「'+event.message.text + '」ってなんじゃい？'))
+    if event.message.text in pattern_dict:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=pattern_dict[event.message.text]))
+    else:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="HA HA HA HA HA"))
+
+def prepare_dict():
+    with open("./static/pattern.txt") as file:
+        for line in file:
+            kv = line.split(None,1)
+            pattern_dict[kv[0].strip()] = kv[1].strip()
+
 
 if __name__ == '__main__':
+    prepare_dict()
     app.run(host='0.0.0.0',port=port)
