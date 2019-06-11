@@ -36,8 +36,7 @@ def handle_message(event):
     if event.message.text in pattern_dict:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=pattern_dict[event.message.text]))
     else:
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text="HA HA HA HA HA"))
-
+        pass
 def prepare_dict():
     with open("./static/pattern.txt") as file:
         for line in file:
