@@ -33,12 +33,13 @@ def callback():
 
 @handler.add(MessageEvent,message=TextMessage)
 def handle_message(event):
-    res = "null"
+    res = ''
     for k,v in pattern_dict.items():
         if k in event.message.text:
             res = v
             break
-    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=res))
+    if res:
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=res))
 
 def prepare_dict():
     with open("./static/pattern.txt") as file:
