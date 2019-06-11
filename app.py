@@ -38,8 +38,7 @@ def handle_message(event):
         if k in event.message.text:
             res = v
             break
-
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=res))
+    line_bot_api.reply_message(event.reply_token, TextSendMessage(text=res))
 
 def prepare_dict():
     with open("./static/pattern.txt") as file:
