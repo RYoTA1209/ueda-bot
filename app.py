@@ -16,6 +16,10 @@ handler = WebhookHandler(LINE_CHANNEL_SECRET)
 
 pattern_dict = {}
 
+@app.route('/',methods=['GET'])
+def index():
+    return 'UedaBot'
+
 @app.route('/callback',methods=['POST'])
 def callback():
     signature = request.headers['X-Line-Signature']
