@@ -1,3 +1,10 @@
+# Ver1.1.0
+# Develop Edition.
+# Feature Plan
+#   * Add vocabulary console.
+#   * unrepliable log.
+#   * (reply movie.)
+
 from flask import Flask,request,abort
 from linebot import LineBotApi,WebhookHandler
 from linebot.exceptions import InvalidSignatureError
